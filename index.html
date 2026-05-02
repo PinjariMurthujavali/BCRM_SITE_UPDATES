@@ -417,7 +417,7 @@
       <p style="font-size:12px;color:#666;margin-bottom:10px">ERPNext / Frappe — annual AMC/support renewal for ERP implementation customers</p>
       <table style="font-size:12px">
         <tr><td style="color:#888">AMC Eligible</td><td><span class="badge b-green">Yes</span></td></tr>
-        <tr><td style="color:#888">AMC Type</td><td>Paid / Deferred</td></tr>
+        <tr><td style="color:#888">AMC Type</td><td>Paid / Introductory AMC Offer</td></tr>
         <tr><td style="color:#888">Start Date</td><td>= Go-live date or Invoice date</td></tr>
         <tr><td style="color:#888">Expiry</td><td>Start + 365 days</td></tr>
         <tr><td style="color:#888">Renewal Trigger</td><td>30 days before expiry</td></tr>
@@ -438,7 +438,7 @@
       <tr><td><strong>Tally ERP 9</strong></td><td>Legacy ERP</td><td><span class="badge b-amber">Limited</span></td><td>Paid (if still active)</td><td>Encourage migration to Prime</td></tr>
       <tr><td><strong>TallyShop Add-ons</strong></td><td>Extensions</td><td><span class="badge b-blue">Varies</span></td><td>Per add-on policy</td><td>Confirm at time of sale</td></tr>
       <tr><td><strong>Tally Customisation</strong></td><td>Professional Services</td><td><span class="badge b-red">No</span></td><td>N/A</td><td>One-time delivery; AMC separate</td></tr>
-      <tr><td><strong>Shoper 9</strong></td><td>Retail POS</td><td><span class="badge b-green">Yes</span></td><td>Deferred</td><td>Year 1 warranty, AMC from yr 2</td></tr>
+      <tr><td><strong>Shoper 9</strong></td><td>Retail POS</td><td><span class="badge b-green">Yes</span></td><td>Introductory AMC Offer</td><td>Year 1 warranty, AMC from yr 2</td></tr>
     </table>
   </div>
 
@@ -461,9 +461,9 @@
         <td>Invoice 15-Jun-2025 → Expiry 14-Jun-2026</td>
       </tr>
       <tr>
-        <td><span class="badge b-blue">Deferred</span></td>
+        <td><span class="badge b-blue">Introductory AMC Offer</span></td>
         <td>Invoice Date + 365 days</td>
-        <td>Deferred Start + 365 days</td>
+        <td>Introductory AMC Offer Start + 365 days</td>
         <td>Invoice 01-Jan-2025 → Start 01-Jan-2026 → Expiry 31-Dec-2026</td>
       </tr>
     </table>
@@ -487,9 +487,9 @@
       <div style="background:var(--amber-50);border-radius:8px;padding:14px">
         <div style="font-weight:bold;font-size:13px;color:var(--amber-800);margin-bottom:8px">📅 AMC Date Fields</div>
         <table style="font-size:12px">
-          <tr><td style="color:#888">AMC Type</td><td>Paid / Complementary / Deferred</td></tr>
+          <tr><td style="color:#888">AMC Type</td><td>Paid / Complementary / Introductory AMC Offer</td></tr>
           <tr><td style="color:#888">AMC Start Date</td><td>Auto-set from invoice date logic</td></tr>
-          <tr><td style="color:#888">AMC Expiry Date</td><td>Start + 365 days (or deferred rule)</td></tr>
+          <tr><td style="color:#888">AMC Expiry Date</td><td>Start + 365 days (or Introductory AMC Offer rule)</td></tr>
           <tr><td style="color:#888">AMC Status</td><td>Active / Expired / Renewed / Cancelled</td></tr>
           <tr><td style="color:#888">Last Renewed On</td><td>Date of last renewal invoice</td></tr>
         </table>
@@ -566,7 +566,7 @@
         <span class="flow-node b-amber">Expiry</span><span class="flow-arrow">→</span>
         <span class="flow-node b-teal">Renewal</span>
       </div>
-      <p style="font-size:13px;color:#666">Annual Maintenance Contract tied to a product. Created at invoice. Three types: Paid, Complementary, Deferred.</p>
+      <p style="font-size:13px;color:#666">Annual Maintenance Contract tied to a product. Created at invoice. Three types: Paid, Complementary, Introductory AMC Offer.</p>
     </div>
     <div class="card">
       <h3 style="margin-top:0">Revenue engine 3 — Renewal / upgrade</h3>
@@ -687,7 +687,7 @@
     <div class="step-card">
       <div class="step-header"><span class="step-num">8</span><span class="step-title">Sales Invoice + AMC creation</span></div>
       <p>Generate the final Sales Invoice. Immediately after submission, create the Customer Product record and set up AMC with start date, expiry, and type.</p>
-      <div class="tip">Set AMC type at this stage — Paid, Complementary, or Deferred. This drives all future renewal reminders.</div>
+      <div class="tip">Set AMC type at this stage — Paid, Complementary, or Introductory AMC Offer. This drives all future renewal reminders.</div>
       <div class="tag-row"><span class="doctype-tag">DocType: Sales Invoice</span><span class="doctype-tag">DocType: Customer Product (custom)</span><span class="doctype-tag">DocType: AMC (custom)</span></div>
     </div>
   </div>
@@ -774,7 +774,7 @@
     <div class="step-card">
       <div class="step-header"><span class="step-num">3</span><span class="step-title">Invoice + AMC activated</span></div>
       <p>On payment: create AMC record. Set type, start date (invoice date), expiry (+1 year). AMC → Active.</p>
-      <div class="tip">For Deferred AMC: set start date = invoice date + 1 year, expiry = start date + 1 year.</div>
+      <div class="tip">For Introductory AMC Offer AMC: set start date = invoice date + 1 year, expiry = start date + 1 year.</div>
     </div>
   </div>
 
@@ -875,8 +875,8 @@
         <tbody><tr><th>Field</th><th>Type</th><th>Required</th><th>Notes</th></tr>
         <tr><td>customer</td><td>Link:Customer</td><td>Yes</td><td>Parent customer</td></tr>
         <tr><td>customer_product</td><td>Link:Customer Product</td><td>Yes</td><td>Linked product record</td></tr>
-        <tr><td>amc_type</td><td>Select</td><td>Yes</td><td>Paid / Complementary / Deferred</td></tr>
-        <tr><td>start_date</td><td>Date</td><td>Yes</td><td>= Invoice date (or +1 year for Deferred)</td></tr>
+        <tr><td>amc_type</td><td>Select</td><td>Yes</td><td>Paid / Complementary / Introductory AMC Offer</td></tr>
+        <tr><td>start_date</td><td>Date</td><td>Yes</td><td>= Invoice date (or +1 year for Introductory AMC Offer)</td></tr>
         <tr><td>expiry_date</td><td>Date</td><td>Yes</td><td>= start_date + 1 year</td></tr>
         <tr><td>status</td><td>Select</td><td>Yes</td><td>Active / Expired / Renewed / Cancelled</td></tr>
         <tr><td>sales_invoice</td><td>Link:Sales Invoice</td><td>Yes</td><td>Invoice that created this AMC</td></tr>
@@ -1026,9 +1026,9 @@
       <h3 style="margin-top:0">⏱️Introductory AMC Offer</h3>
       <p style="font-size:13px">AMC kicks in after an initial warranty period (typically year 2 onwards).</p>
       <table style="margin-top:8px">
-        <tr><td style="color:#888;font-size:12px">AMC Type</td><td>Deferred</td></tr>
+        <tr><td style="color:#888;font-size:12px">AMC Type</td><td>Introductory AMC Offer</td></tr>
         <tr><td style="color:#888;font-size:12px">Start Date</td><td>Invoice date + 1 year</td></tr>
-        <tr><td style="color:#888;font-size:12px">Expiry</td><td>Deferred start + 1 year (365 days)</td></tr>
+        <tr><td style="color:#888;font-size:12px">Expiry</td><td>Introductory AMC Offer start + 1 year (365 days)</td></tr>
         <tr><td style="color:#888;font-size:12px">Example</td><td>Year 1 free warranty, AMC from year 2</td></tr>
         <tr><td style="color:#888;font-size:12px">Product Link</td><td>Mandatory — linked to Customer Product</td></tr>
       </table>
@@ -1059,7 +1059,7 @@
         <table style="font-size:12px">
           <tr><th>Field</th><th>Value / Rule</th></tr>
           <tr><td>Product Name</td><td>E.g. Tally Prime Silver / Gold</td></tr>
-          <tr><td>AMC Start Date</td><td>Invoice date (Paid/Comp) or Invoice+1yr (Deferred)</td></tr>
+          <tr><td>AMC Start Date</td><td>Invoice date (Paid/Comp) or Invoice+1yr (Introductory AMC Offer)</td></tr>
           <tr><td>AMC Expiry Date</td><td>Start Date + 365 days</td></tr>
           <tr><td>Days to Expiry</td><td>Computed daily: Expiry − Today</td></tr>
           <tr><td>Days Since Expiry</td><td>Computed daily: Today − Expiry (post-expiry)</td></tr>
@@ -1326,7 +1326,7 @@
         <tbody><tr><th>Scenario</th><th>Create?</th></tr>
         <tr><td>Complementary support included</td><td><span class="badge b-green">Yes — Type: Compl.</span></td></tr>
         <tr><td>Customer pays for AMC</td><td><span class="badge b-green">Yes — Type: Paid</span></td></tr>
-        <tr><td>AMC starts after warranty year</td><td><span class="badge b-green">Yes — Type: Deferred</span></td></tr>
+        <tr><td>AMC starts after warranty year</td><td><span class="badge b-green">Yes — Type: Introductory AMC Offer</span></td></tr>
         <tr><td>No support contracted</td><td><span class="badge b-red">No</span></td></tr>
         <tr><td>Customer buys AMC later</td><td><span class="badge b-green">Yes — at that point</span></td></tr>
       </tbody></table>
@@ -1643,7 +1643,7 @@
         <div class="pill-group" id="amc-type-pills">
           <span class="pill" onclick="selectPill(this,'amc-type-pills');calcAMCDates(this)">💰 Paid</span>
           <span class="pill" onclick="selectPill(this,'amc-type-pills');calcAMCDates(this)">🎁 Complementary</span>
-          <span class="pill" onclick="selectPill(this,'amc-type-pills');calcAMCDates(this)">⏱️ Deferred</span>
+          <span class="pill" onclick="selectPill(this,'amc-type-pills');calcAMCDates(this)">⏱️ Introductory AMC Offer</span>
         </div>
         <div class="form-hint" id="amc-type-hint" style="margin-top:8px">Select type to auto-calculate dates</div>
       </div>
@@ -1686,7 +1686,7 @@
           <input class="form-control" type="text" placeholder="Salesperson name">
         </div>
       </div>
-      <div class="tip" style="margin-top:4px">For <strong>Deferred AMC</strong>: Start = Invoice date + 1 year, Expiry = Deferred start + 1 year.</div>
+      <div class="tip" style="margin-top:4px">For <strong>Introductory AMC Offer AMC</strong>: Start = Invoice date + 1 year, Expiry = Introductory AMC Offer start + 1 year.</div>
     </div>
     <div class="modal-footer">
       <button class="btn-cancel" onclick="closeModal('modal-amc')">Cancel</button>
@@ -2119,7 +2119,7 @@ function toggleAcc(head){
 
 const SEARCH_DATA = [
   {q:'product tally prime erp9 shoper amc eligible catalogue',t:'Products — Catalogue & AMC Eligibility',s:'Tally Prime, Tally Prime Edit Log, Tally ERP 9, TallyShop Add-ons, Customisation, Shoper 9. Each product has AMC eligibility, default AMC type, and date rules.',tab:'products'},
-  {q:'product amc start date expiry date invoice calculation rule',t:'Product AMC Date Rules',s:'Paid/Complementary: Start = Invoice date, Expiry = Start + 365 days. Deferred: Start = Invoice + 365, Expiry = Deferred Start + 365.',tab:'products'},
+  {q:'product amc start date expiry date invoice calculation rule',t:'Product AMC Date Rules',s:'Paid/Complementary: Start = Invoice date, Expiry = Start + 365 days. Introductory AMC Offer: Start = Invoice + 365, Expiry = Introductory AMC Offer Start + 365.',tab:'products'},
   {q:'customer product record serial license renewal date amc status fields',t:'Customer Product — Key Fields',s:'Fields: Customer, Product, Serial/License No., Invoice Reference, No. of Users, AMC Type, AMC Start Date, AMC Expiry Date, AMC Status, Last Renewed On, Reminder flags.',tab:'products'},
   {q:'lead enquiry source create',t:'Lead — Step 1 (New Sale)',s:'Create a Lead when a new enquiry arrives. Capture: Name, Mobile/Email, Source (Incoming Call / Referral / Campaign / Website). Do NOT create a Quotation at this stage.',tab:'flows'},
   {q:'qualification need budget decision maker',t:'Qualification criteria',s:'Three criteria must pass: Need confirmed, Budget available, Decision-maker confirmed. If all pass → convert to Opportunity.',tab:'flows'},
@@ -2127,7 +2127,7 @@ const SEARCH_DATA = [
   {q:'quotation create from opportunity never lead',t:'Quotation rules',s:'Always create Quotation from Opportunity. Never from Lead. Skip for fixed-price direct renewals.',tab:'rules'},
   {q:'customer creation convert opportunity',t:'Customer creation',s:'Convert Opportunity to Customer once the deal is confirmed.',tab:'flows'},
   {q:'sales order payment invoice proforma',t:'Sales Order → Payment → Invoice',s:'Create Sales Order from Opportunity → Proforma Invoice. Record Payment Receipt. Generate final Sales Invoice.',tab:'flows'},
-  {q:'amc create type paid complementary deferred start date expiry',t:'AMC creation',s:'Create AMC at invoice stage. Set type (Paid / Complementary / Deferred), start date = invoice date, expiry = start + 1 year. Deferred: start = invoice date + 1 year.',tab:'amc'},
+  {q:'amc create type paid complementary Introductory AMC Offer start date expiry',t:'AMC creation',s:'Create AMC at invoice stage. Set type (Paid / Complementary / Introductory AMC Offer), start date = invoice date, expiry = start + 1 year. Introductory AMC Offer: start = invoice date + 1 year.',tab:'amc'},
   {q:'renewal easy direct invoice ready customer fixed price',t:'Easy renewal — Direct Invoice',s:'If customer is ready and price is fixed: go directly to Sales Invoice from Customer. No Opportunity or Quotation needed.',tab:'flows'},
   {q:'renewal follow up opportunity not responding',t:'Follow-up renewal — Opportunity',s:'If customer is not responding, create a Renewal Opportunity from the Customer. No Lead needed. Track with Stage/Activity/Response.',tab:'flows'},
   {q:'reminder 30 25 20 15 10 5 days expiry whatsapp sms email notification task pre post',t:'AMC Reminder Automation — Full Schedule',s:'Pre-expiry: -30, -25, -20, -15, -10, -5 days. Expiry Day: 0. Post-expiry daily: +1 to +5. Weekly every Monday up to 2 months. After 3 months special. Post-renewal: Day 1-5, 10, 15, 20, 25, 30, weekly then monthly. Channels: WhatsApp + SMS + Email.',tab:'amc'},
@@ -2197,7 +2197,7 @@ function calcAMCDates(el){
   const hints = {
     'Paid':'Start = Invoice date, Expiry = Start + 365 days',
     'Complementary':'Start = Invoice date, Expiry = Start + 365 days',
-    'Deferred':'Start = Invoice date + 1 year, Expiry = Deferred start + 365 days'
+    'Introductory AMC Offer':'Start = Invoice date + 1 year, Expiry = Introductory AMC Offer start + 365 days'
   };
   document.getElementById('amc-type-hint').textContent = hints[amcType] || '';
   recalcAMCDates();
@@ -2207,7 +2207,7 @@ function recalcAMCDates(){
   if(!inv) return;
   const d = new Date(inv);
   let startDate, expiryDate;
-  if(amcType==='Deferred'){
+  if(amcType==='Introductory AMC Offer'){
     startDate = new Date(d); startDate.setFullYear(startDate.getFullYear()+1);
   } else {
     startDate = new Date(d);
